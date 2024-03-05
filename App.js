@@ -1,6 +1,6 @@
 import { StatusBar } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import Routes from './src/Routes/Routes';
+import Routes from './src/routes/Routes';
 import CartProvider from './src/Context/CartContext';
 
 export default function App() {
