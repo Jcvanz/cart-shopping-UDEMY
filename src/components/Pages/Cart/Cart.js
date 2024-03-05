@@ -1,21 +1,37 @@
-import React, { useState } from 'react';
-import { FlatList, Pressable, SafeAreaView, StatusBar, StyleSheet, Text, TextInput, View, Image } from 'react-native';
+import React, { useContext } from 'react';
+import { FlatList, StyleSheet, View, Text } from 'react-native';
+import { CartContext } from '../../../Context/CartContext';
+import CardItem from '../../CardItem/CardItem';
 
 export default function Cart() {
 
-  return (
-    <View style={styles.container}>
+    const { cart, addItemCart, removeItemCart } = useContext(CartContext);
 
-    </View>
-  );
+    return (
+        <View style={styles.container}>
+            <FlatList
+                data={cart}
+                showsVerticalScrollIndicator={false}
+                keyExtractor={(item) => String(item.id)}
+                ListEmptyComponent={() => <Text style={styles.textInf}>Nenhum item no carrinho...</Text>}
+                renderItem={({item}) => ( 
+                    <CardItem data={item} 
+                        addAmount={() => addItemCart(item)} 
+                        removeAmount={() => removeItemCart(item)}
+                    />
+                )}
+            />
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f2f6fc',
-    marginTop: 25,
-    alignItems: 'center',
-  },
- 
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        padding: 14
+    },
+    textInf: {
+        textAlign: 'center'
+    }
 });
